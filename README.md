@@ -1,4 +1,8 @@
 # basketball-manager-js
+```
+This is an free basketball manager game. Written in Vue.js & Vuetify.js. Used randomuser.me for completely random players.
+
+This is a first version, the project is currently work in progress, so stay tuned.
 
 ## Project setup
 ```
