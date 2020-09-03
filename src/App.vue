@@ -1,32 +1,45 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
-  </div>
+  <v-app>
+    <v-app-bar app color="primary" dark v-if="isInstalled">
+      <template v-for="(route, key) in $router.options.routes">
+        <v-btn
+          :to="route.path"
+          :key="key"
+          text
+          v-if="route.name != 'Setup'"
+          depressed
+        >
+          {{ route.name }}
+        </v-btn>
+      </template>
+    </v-app-bar>
+
+    <v-main>
+      <template v-if="isInstalled">
+        <router-view />
+      </template>
+      <template v-else>
+        <Setup />
+      </template>
+    </v-main>
+  </v-app>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import Setup from "./components/Setup";
 
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+export default {
+  components: {
+    Setup
+  },
+  computed: {
+    isInstalled() {
+      return this.$store.state.settings.isInstalled && true
+    }
+  },
+  created() {
+    this.$store.dispatch("fetchSettings");
+    this.$store.dispatch("fetchClubs");
+  }
+};
+</script>
