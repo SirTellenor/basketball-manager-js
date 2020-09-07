@@ -31,14 +31,14 @@ const routes = [
     component: Market
   },
   {
-    path: "/settings",
-    name: "Settings",
-    component: Settings
-  },
-  {
     path: "/league",
     name: "League",
     component: League
+  },
+  {
+    path: "/settings",
+    name: "Settings",
+    component: Settings
   }
 ];
 

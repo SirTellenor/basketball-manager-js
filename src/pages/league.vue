@@ -12,15 +12,7 @@
       <template v-slot:expanded-item="{ item }">
         <td colspan="12">
           <v-container>
-            <v-data-table
-              :headers="playerHeaders"
-              :items="item.players"
-              :items-per-page="item.players.length"
-              class="elevation-1"
-              hide-default-footer
-              item-key="id"
-              sort-by="nr"
-            ></v-data-table>
+            <PlayerTable :items="item.players" />
           </v-container>
         </td>
       </template>
@@ -29,32 +21,19 @@
 </template>
 
 <script>
+import PlayerTable from '../components/PlayerTable'
+
 export default {
+  components: {
+    PlayerTable
+  },
   data() {
     return {
       expanded: [],
       headers: [{
         text: 'Name',
         value: 'name'
-      }],
-      playerHeaders: [
-        {
-          text: "Number",
-          value: "nr"
-        },
-        {
-          text: "Position",
-          value: "position"
-        },
-        {
-          text: "Name",
-          value: "name"
-        },
-        {
-          text: "Nationality",
-          value: "nationality"
-        }
-      ]
+      }]
     }    
   }
 }
