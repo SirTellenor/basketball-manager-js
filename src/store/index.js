@@ -14,7 +14,8 @@ export default new Vuex.Store({
   state: {
     clubs: [],
     settings: {
-      showWelcomeDialog: false
+      showWelcomeDialog: false,
+      darkMode: false
     }
   },
   mutations: {

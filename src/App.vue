@@ -40,6 +40,7 @@ export default {
   created() {
     this.$store.dispatch("fetchSettings");
     this.$store.dispatch("fetchClubs");
+    if(this.$store.state.settings.darkMode) this.$vuetify.theme.dark = true
   }
 };
 </script>

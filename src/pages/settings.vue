@@ -18,6 +18,18 @@
       />
       <v-spacer />
     </v-row>
+    <v-row>
+      <v-spacer />
+      <v-switch
+        v-model="settings.darkMode"
+        label="Darkmode"
+        @change="
+          $vuetify.theme.dark = !$vuetify.theme.dark
+          updateSettings(settings)
+        "
+      />
+      <v-spacer />
+    </v-row>
   </v-container>
 </template>
 
