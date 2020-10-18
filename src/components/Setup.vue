@@ -89,7 +89,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 
 const shuffle = array => {
   var i = array.length,
@@ -168,7 +168,7 @@ export default {
       axios
         .get("https://randomuser.me/api/?results=" + cnt + "&gender=male")
         .then(res => {
-          res = res.data.results
+          res = res.data.results;
           let resCnt = 0;
           for (let i = 0; i < clubs.length; i++) {
             clubs[i].players = [];
@@ -198,8 +198,8 @@ export default {
           };
 
           localStorage.setItem("bmjs_clubs", JSON.stringify(clubs));
-          this.$store.commit('SET_SETTINGS', settings)
-          location.reload()
+          this.$store.commit("SET_SETTINGS", settings);
+          location.reload();
           //localStorage.setItem("bmjs_settings", JSON.stringify(settings));
         });
     }

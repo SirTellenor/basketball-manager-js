@@ -1,5 +1,5 @@
 <template>
-<v-container>
+  <v-container>
     <v-data-table
       :headers="headers"
       :items="$store.state.clubs"
@@ -17,11 +17,11 @@
         </td>
       </template>
     </v-data-table>
-</v-container>
+  </v-container>
 </template>
 
 <script>
-import PlayerTable from '../components/PlayerTable'
+import PlayerTable from "../components/PlayerTable";
 
 export default {
   components: {
@@ -30,11 +30,13 @@ export default {
   data() {
     return {
       expanded: [],
-      headers: [{
-        text: 'Name',
-        value: 'name'
-      }]
-    }    
+      headers: [
+        {
+          text: "Name",
+          value: "name"
+        }
+      ]
+    };
   }
-}
+};
 </script>
