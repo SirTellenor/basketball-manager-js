@@ -13,6 +13,7 @@
         <v-select
           v-model="selectedPositions"
           :items="items"
+          label="Positions"
           multiple
           outlined
         ></v-select>
@@ -21,7 +22,7 @@
 
     <h3 v-if="isLoading">Searching ...</h3>
 
-    <v-container v-if="!isLoading && search != '' && search.length > 2">
+    <v-container v-if="!isLoading && players.length > 0">
       <v-data-table
         :items="players"
         :headers="headers"
@@ -41,19 +42,24 @@ export default {
   data() {
     return {
       isLoading: false,
-      items: [{
+      items: [
+        {
           text: "Point Guard",
           value: "PG"
-        }, {
+        },
+        {
           text: "Shooting Guard",
           value: "SG"
-        }, {
+        },
+        {
           text: "Small Forward",
           value: "SF"
-        }, {
+        },
+        {
           text: "Power Forward",
           value: "PF"
-        }, {
+        },
+        {
           text: "Center",
           value: "C"
         }
@@ -79,16 +85,16 @@ export default {
   },
   computed: {
     playersArr() {
-      let playersArr = []
+      let playersArr = [];
 
-      this.$store.state.clubs.forEach((club) => {
-        club.players.forEach((player) => {
-          player.club = club.name
-          playersArr.push(player)
-        })
-      })
+      this.$store.state.clubs.forEach(club => {
+        club.players.forEach(player => {
+          player.club = club.name;
+          playersArr.push(player);
+        });
+      });
 
-      return playersArr
+      return playersArr;
     }
   },
   watch: {
@@ -96,25 +102,28 @@ export default {
       this.searchPlayers();
     },
     selectedPositions() {
-      this.searchPlayers()
+      this.searchPlayers();
     }
   },
   methods: {
     searchPlayers() {
+      this.isLoading = true;
+      this.players = this.playersArr
       if (this.search.length > 2) {
-        this.isLoading = true;
-        this.players = this.playersArr.filter(x =>
+        this.players = this.players.filter(x =>
           this.like("%" + this.search + "%", x.name)
         );
         this.isLoading = false;
       }
-      if(this.selectedPositions.length > 0) {
-        this.filterPlayers(this.selectedPositions)
+      if (this.selectedPositions.length > 0) {
+        this.filterPlayersByPosition(this.selectedPositions);
       }
+      this.isLoading = false;
     },
-    filterPlayers(val) {
-      if(val && val.length > 0) {
-        this.players = this.players.filter(x => val.includes(x.position))
+    filterPlayersByPosition(positions) {
+      if (positions && positions.length > 0) {
+        this.players = this.players.filter(x => positions.includes(x.position));
+        console.log(this.players)
       }
     },
     like(search, haystack) {
