@@ -41,12 +41,22 @@ export default {
   data() {
     return {
       isLoading: false,
-      items: [
-        "Point Guard",
-        "Shooting Guard",
-        "Small Forward",
-        "Power Forward",
-        "Center"
+      items: [{
+          text: "Point Guard",
+          value: "PG"
+        }, {
+          text: "Shooting Guard",
+          value: "SG"
+        }, {
+          text: "Small Forward",
+          value: "SF"
+        }, {
+          text: "Power Forward",
+          value: "PF"
+        }, {
+          text: "Center",
+          value: "C"
+        }
       ],
       selectedPositions: [],
       search: "",
@@ -84,6 +94,9 @@ export default {
   watch: {
     search() {
       this.searchPlayers();
+    },
+    selectedPositions() {
+      this.searchPlayers()
     }
   },
   methods: {
@@ -94,6 +107,14 @@ export default {
           this.like("%" + this.search + "%", x.name)
         );
         this.isLoading = false;
+      }
+      if(this.selectedPositions.length > 0) {
+        this.filterPlayers(this.selectedPositions)
+      }
+    },
+    filterPlayers(val) {
+      if(val && val.length > 0) {
+        this.players = this.players.filter(x => val.includes(x.position))
       }
     },
     like(search, haystack) {
