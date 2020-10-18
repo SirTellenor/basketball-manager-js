@@ -24,7 +24,6 @@ export default new Vuex.Store({
     },
     SET_PLAYERS(state, players) {
       state.players = players;
-      //localStorage.setItem("bmjs_players", JSON.stringify(state.players));
     },
     SET_SETTINGS(state, settings) {
       state.settings = settings;
@@ -32,39 +31,14 @@ export default new Vuex.Store({
     },
     INIT_CLUBS(state, clubs) {
       state.clubs = clubs;
+    },
+    RESET_CLUBS(state) {
+      state.clubs = []
+      state.settings = settingsObj
+      localStorage.setItem("bmjs_settings", JSON.stringify(settingsObj));
     }
   },
   actions: {
-    /* fetchPlayers({ commit }) {
-      commit("RESET_PLAYERS");
-
-      let players = JSON.parse(localStorage.getItem("bmjs_players"));
-      // let players = []
-
-      if (!players || players.length <= 0) {
-        axios
-          .get("https://randomuser.me/api/?results=13&gender=male")
-          .then(res => {
-            let numbers = [];
-
-            res.data.results.forEach((player, key) => {
-              const _player = {
-                name: player.name.first + " " + player.name.last,
-                nr: numbers[key],
-                position: positions[key],
-                id: player.login.uuid,
-                nationality: player.location.country
-              };
-
-              players.push(_player);
-            });
-
-            commit("SET_PLAYERS", players);
-          });
-      } else {
-        commit("SET_PLAYERS", players);
-      }
-    }, */
     fetchSettings({ commit }) {
       let settings = JSON.parse(localStorage.getItem("bmjs_settings"));
 
@@ -85,7 +59,7 @@ export default new Vuex.Store({
   },
   getters: {
     myPlayers: state => {
-      return state.clubs[0].players
+      return state.clubs[0].players;
     }
   }
 });
