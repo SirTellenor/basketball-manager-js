@@ -32,10 +32,7 @@
     </v-row>
     <v-row>
       <v-spacer />
-      <v-btn
-        color="primary"
-        @click="reset()"
-      >
+      <v-btn color="primary" @click="reset()">
         Reset Data
       </v-btn>
       <v-spacer />
@@ -57,7 +54,7 @@ export default {
       this.$store.commit("SET_SETTINGS", settings);
     },
     reset() {
-      this.$store.commit('RESET_CLUBS')
+      this.$store.commit("RESET_CLUBS");
     }
   }
 };

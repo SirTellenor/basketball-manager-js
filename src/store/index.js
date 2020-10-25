@@ -1,6 +1,5 @@
 import Vue from "vue";
 import Vuex from "vuex";
-// import axios from "axios";
 
 Vue.use(Vuex);
 
@@ -16,6 +15,9 @@ export default new Vuex.Store({
     settings: {
       showWelcomeDialog: false,
       darkMode: false
+    },
+    market: {
+      contractlessPlayers: []
     }
   },
   mutations: {
@@ -32,10 +34,19 @@ export default new Vuex.Store({
     INIT_CLUBS(state, clubs) {
       state.clubs = clubs;
     },
+    INIT_MARKET(state, market) {
+      state.market = market
+    },
     RESET_CLUBS(state) {
-      state.clubs = []
-      state.settings = settingsObj
+      state.clubs = [];
+      state.settings = settingsObj;
       localStorage.setItem("bmjs_settings", JSON.stringify(settingsObj));
+    },
+    DISMISS_PLAYER(state, player) {
+      state.market.contractlessPlayers.push(player)
+      state.clubs[0].players = state.clubs[0].players.filter(x => x != player)
+      localStorage.setItem("bmjs_clubs", JSON.stringify(state.clubs))
+      localStorage.setItem("bmjs_market", JSON.stringify(state.market))
     }
   },
   actions: {
@@ -55,6 +66,13 @@ export default new Vuex.Store({
       commit("INIT_CLUBS", clubs);
 
       return clubs;
+    },
+    fetchMarket({ commit }) {
+      let market = JSON.parse(localStorage.getItem("bmjs_market"));
+
+      commit("INIT_MARKET", market);
+
+      return market;
     }
   },
   getters: {

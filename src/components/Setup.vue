@@ -170,6 +170,7 @@ export default {
         .then(res => {
           res = res.data.results;
           let resCnt = 0;
+          const stamina = 5;
           for (let i = 0; i < clubs.length; i++) {
             clubs[i].players = [];
             for (let j = 0; j < 13; j++) {
@@ -183,7 +184,10 @@ export default {
                 nr: playerNumbers[j],
                 position: positions[j],
                 id: player.login.uuid,
-                nationality: player.location.country
+                nationality: player.location.country,
+                stamina,
+                offence: Math.floor(Math.random() * (8 - 3)) + 3,
+                defence: Math.floor(Math.random() * (8 - 3)) + 3
               };
 
               clubs[i].players.push(_player);
@@ -200,7 +204,6 @@ export default {
           localStorage.setItem("bmjs_clubs", JSON.stringify(clubs));
           this.$store.commit("SET_SETTINGS", settings);
           location.reload();
-          //localStorage.setItem("bmjs_settings", JSON.stringify(settings));
         });
     }
   }

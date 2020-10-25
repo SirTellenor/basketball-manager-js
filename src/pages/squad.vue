@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <PlayerTable :items="$store.state.clubs[0].players" />
+    <PlayerTable :items="$store.state.clubs[0].players" :myPlayers="true" />
   </v-container>
 </template>
 

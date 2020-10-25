@@ -87,6 +87,11 @@ export default {
     playersArr() {
       let playersArr = [];
 
+      this.$store.state.market.contractlessPlayers.forEach(player => {
+        player.club = 'contractless'
+        playersArr.push(player)
+      })
+
       this.$store.state.clubs.forEach(club => {
         club.players.forEach(player => {
           player.club = club.name;
@@ -108,7 +113,7 @@ export default {
   methods: {
     searchPlayers() {
       this.isLoading = true;
-      this.players = this.playersArr
+      this.players = this.playersArr;
       if (this.search.length > 2) {
         this.players = this.players.filter(x =>
           this.like("%" + this.search + "%", x.name)
@@ -123,7 +128,6 @@ export default {
     filterPlayersByPosition(positions) {
       if (positions && positions.length > 0) {
         this.players = this.players.filter(x => positions.includes(x.position));
-        console.log(this.players)
       }
     },
     like(search, haystack) {
