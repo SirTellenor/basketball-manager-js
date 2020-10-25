@@ -201,6 +201,11 @@ export default {
             isInstalled: true
           };
 
+          const market = {
+            contractlessPlayers: []
+          }
+
+          localStorage.setItem("bmjs_market", JSON.stringify(market));
           localStorage.setItem("bmjs_clubs", JSON.stringify(clubs));
           this.$store.commit("SET_SETTINGS", settings);
           location.reload();
