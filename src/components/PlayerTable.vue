@@ -33,39 +33,22 @@
       @click:outside="dialog = false"
       max-width="750px"
     >
-      <v-card>
-        <v-card-title>{{
-          "#" + selectedPlayer.nr + " " + selectedPlayer.name
-        }}</v-card-title>
-        <v-card-text>
-          <p>{{ selectedPlayer.nationality }}</p>
-          <v-row>
-            <v-col cols="4">
-              <v-icon>mdi-sword</v-icon>
-              {{ selectedPlayer.offence }}
-            </v-col>
-            <v-col cols="4">
-              <v-icon>mdi-shield</v-icon>
-              {{ selectedPlayer.defence }}
-            </v-col>
-            <v-col cols="4">
-              <v-icon>mdi-battery-charging-60</v-icon>
-              {{ selectedPlayer.stamina }}
-            </v-col>
-          </v-row>
-        </v-card-text>
-        <v-card-actions v-if="myPlayers">
-          <v-btn color="error" @click="dismiss()" block>
-            DISMISS
-          </v-btn>
-        </v-card-actions>
-      </v-card>
+      <PlayerCard 
+        v-model="selectedPlayer"
+        @dismiss="dismiss"
+        :showActions="true"
+      />
     </v-dialog>
   </v-container>
 </template>
 
 <script>
+import PlayerCard from "../components/PlayerCard";
+
 export default {
+  components: {
+    PlayerCard
+  },
   props: {
     items: {
       type: Array,
@@ -106,7 +89,7 @@ export default {
       this.selectedPlayer = player;
       this.dialog = true;
     },
-    dismiss() {
+    dismiss() {      
       this.$store.commit('DISMISS_PLAYER', this.selectedPlayer)
       this.dialog = false
       this.selectedPlayer = false      
