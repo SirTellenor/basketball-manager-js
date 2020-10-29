@@ -47,6 +47,14 @@ export default new Vuex.Store({
       state.clubs[0].players = state.clubs[0].players.filter(x => x != player)
       localStorage.setItem("bmjs_clubs", JSON.stringify(state.clubs))
       localStorage.setItem("bmjs_market", JSON.stringify(state.market))
+    },
+    ADD_PLAYER(state, player) {
+      state.clubs[0].players.push(player)
+      localStorage.setItem("bmjs_clubs", JSON.stringify(state.clubs))
+    },
+    REMOVE_PLAYER_CONTRACTLESS(state, player) {
+      state.market.contractlessPlayers = state.market.contractlessPlayers.filter(x => x.id != player.id)
+      localStorage.setItem("bmjs_market", JSON.stringify(state.market))
     }
   },
   actions: {
@@ -78,6 +86,16 @@ export default new Vuex.Store({
   getters: {
     myPlayers: state => {
       return state.clubs[0].players;
+    },
+    getShirtNr: state => currenShirtNr => {
+      const nrs = state.clubs[0].players.map(player => player.nr)
+
+      let _currentShirtNr = currenShirtNr
+      while (nrs.includes(_currentShirtNr)) {
+        _currentShirtNr++
+      }
+
+      return _currentShirtNr
     }
   }
 });

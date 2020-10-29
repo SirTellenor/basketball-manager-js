@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-card-title>{{
-      "#" + selectedPlayer.nr + " " + selectedPlayer.name + ' | ' + selectedPlayer.position
+      (showDismiss ? "#" + selectedPlayer.nr + " " : '') + selectedPlayer.name + ' | ' + selectedPlayer.position
     }}</v-card-title>
     <v-card-text>
       <p>{{ selectedPlayer.nationality }}</p>
@@ -20,9 +20,15 @@
         </v-col>
       </v-row>
     </v-card-text>
-    <v-card-actions v-if="showActions">
-      <v-btn color="error" @click="dismiss()" block>
+    <v-card-actions>
+      <v-btn color="error" @click="dismiss()" block v-if="showDismiss">
         DISMISS
+      </v-btn>
+      <v-btn color="primary" @click="offer()" block v-if="showOffer">
+        <v-icon class="ma-1">
+          mdi-offer
+        </v-icon>
+        Make an Offer 
       </v-btn>
     </v-card-actions>
   </v-card>
@@ -35,7 +41,11 @@ export default {
       type: Object,
       default: () => {}
     },
-    showActions: {
+    showDismiss: {
+      type: Boolean,
+      default: false
+    },
+    showOffer: {
       type: Boolean,
       default: false
     }
@@ -59,6 +69,16 @@ export default {
 
       if(res) {
         this.$emit('dismiss')
+      }
+    },
+    async offer() {
+      const res = await this.$dialog.confirm({
+        text: 'Do you realy want this Player to join your club?',
+        title: 'Warning'
+      })
+
+      if(res) {
+        this.$emit('offer')
       }
     }
   }

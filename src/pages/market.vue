@@ -32,13 +32,45 @@
         no-data-text="No players found :/"
         item-key="id"
         group-by="club"
-      />
+      >
+        <template v-slot:item="{ item }">
+          <tr @click="showPlayerInfo(item)" style="cursor:pointer">
+            <td>
+              {{ item.position }}
+            </td>
+            <td>
+              {{ item.name }}
+            </td>
+            <td>
+              {{ item.nationality }}
+            </td>
+          </tr>
+        </template>
+      </v-data-table>
+
+      <v-dialog
+        v-if="dialog"
+        :value="dialog"
+        @click:outside="dialog = false"
+        max-width="750px"
+      >
+        <PlayerCard 
+          v-model="selectedPlayer"
+          :showOffer="selectedPlayer.club === 'contractless'"
+          @offer="offer()"
+        />
+      </v-dialog>
     </v-container>
   </v-container>
 </template>
 
 <script>
+import PlayerCard from '../components/PlayerCard.vue'
+
 export default {
+  components: {
+    PlayerCard
+  },
   data() {
     return {
       isLoading: false,
@@ -80,7 +112,9 @@ export default {
           text: "Nationality",
           value: "nationality"
         }
-      ]
+      ],
+      dialog: false,
+      selectedPlayer: {}
     };
   },
   computed: {
@@ -146,6 +180,19 @@ export default {
       search = search.replace(/%/g, ".*").replace(/_/g, ".");
       // Check matches
       return RegExp("^" + search + "$", "gi").test(haystack);
+    },
+    showPlayerInfo(player) {
+      this.dialog = true
+      this.selectedPlayer = player
+    },
+    offer() {
+      const newPlayer = JSON.parse(JSON.stringify(this.selectedPlayer))
+      newPlayer.nr = this.$store.getters.getShirtNr(newPlayer.nr)
+      this.$store.commit('ADD_PLAYER', newPlayer)
+      this.$store.commit('REMOVE_PLAYER_CONTRACTLESS', this.selectedPlayer)
+      this.selectedPlayer = this.dialog = false
+      this.$dialog.notify.info("The player was succesfully added to your club")
+      this.searchPlayers()
     }
   }
 };

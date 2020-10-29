@@ -36,7 +36,7 @@
       <PlayerCard 
         v-model="selectedPlayer"
         @dismiss="dismiss"
-        :showActions="true"
+        :showDismiss="true"
       />
     </v-dialog>
   </v-container>
