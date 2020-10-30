@@ -7,16 +7,28 @@
       <p>{{ selectedPlayer.nationality }}</p>
       <v-row>
         <v-col cols="4">
-          <v-icon>mdi-sword</v-icon>
-          {{ selectedPlayer.offence }}
+          <PlayerData 
+            :value="selectedPlayer.offence"
+            icon="mdi-sword"
+            :selectedPlayer="selectedPlayer"
+            :showDismiss="showDismiss"
+          />
         </v-col>
         <v-col cols="4">
-          <v-icon>mdi-shield</v-icon>
-          {{ selectedPlayer.defence }}
+          <PlayerData 
+            :value="selectedPlayer.defence"
+            icon="mdi-shield"
+            :selectedPlayer="selectedPlayer"
+            :showDismiss="showDismiss"
+          />
         </v-col>
         <v-col cols="4">
-          <v-icon>mdi-battery-charging-60</v-icon>
-          {{ selectedPlayer.stamina }}
+          <PlayerData 
+            :value="selectedPlayer.stamina"
+            icon="mdi-battery-charging-60"
+            :selectedPlayer="selectedPlayer"
+            :showDismiss="showDismiss"
+          />
         </v-col>
       </v-row>
     </v-card-text>
@@ -35,7 +47,12 @@
 </template>
 
 <script>
+import PlayerData from './PlayerData'
+
 export default {
+  components: {
+    PlayerData
+  },
   props: {
     value: {
       type: Object,
@@ -51,6 +68,7 @@ export default {
     }
   },
   data () {
+    console.log(this.value.club === this.$store.state.clubs[0].name)
     return {
       selectedPlayer: JSON.parse(JSON.stringify(this.value))
     }

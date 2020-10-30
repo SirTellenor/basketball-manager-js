@@ -36,7 +36,7 @@
       <PlayerCard 
         v-model="selectedPlayer"
         @dismiss="dismiss"
-        :showDismiss="true"
+        :showDismiss="myPlayers ? true : false"
       />
     </v-dialog>
   </v-container>
