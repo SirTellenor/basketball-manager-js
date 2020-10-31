@@ -34,7 +34,7 @@ export default {
   data() {
     return {
       alert: this.$store.state.settings.showWelcomeDialog
-    };
+    }
   }
 };
 </script>

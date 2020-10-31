@@ -34,14 +34,14 @@ export default {
   },
   computed: {
     isInstalled() {
-      return this.$store.state.settings.isInstalled && true;
+      return !!this.$store.state.settings.isInstalled
     }
   },
   created() {
-    this.$store.dispatch("fetchSettings");
-    this.$store.dispatch("fetchClubs");
-    this.$store.dispatch("fetchMarket");
-    if (this.$store.state.settings.darkMode) this.$vuetify.theme.dark = true;
+    this.$store.dispatch("fetchSettings")
+    this.$store.dispatch("fetchClubs")
+    this.$store.dispatch("fetchMarket")
+    if (this.$store.state.settings.darkMode) this.$vuetify.theme.dark = true
   }
 };
 </script>

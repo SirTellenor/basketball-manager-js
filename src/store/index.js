@@ -7,7 +7,7 @@ const settingsObj = {
   showWelcomeDialog: true,
   clubname: "",
   isInstalled: false
-};
+}
 
 export default new Vuex.Store({
   state: {
@@ -98,4 +98,4 @@ export default new Vuex.Store({
       return _currentShirtNr
     }
   }
-});
+})

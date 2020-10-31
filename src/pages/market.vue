@@ -128,46 +128,46 @@ export default {
 
       this.$store.state.clubs.forEach(club => {
         club.players.forEach(player => {
-          player.club = club.name;
-          playersArr.push(player);
+          player.club = club.name
+          playersArr.push(player)
         });
       });
 
-      return playersArr;
+      return playersArr
     }
   },
   watch: {
     search() {
-      this.searchPlayers();
+      this.searchPlayers()
     },
     selectedPositions() {
-      this.searchPlayers();
+      this.searchPlayers()
     }
   },
   methods: {
     searchPlayers() {
-      this.isLoading = true;
-      this.players = this.playersArr;
+      this.isLoading = true
+      this.players = this.playersArr
       if (this.search.length > 2) {
         this.players = this.players.filter(x =>
           this.like("%" + this.search + "%", x.name)
         );
-        this.isLoading = false;
       }
       if (this.selectedPositions.length > 0) {
-        this.filterPlayersByPosition(this.selectedPositions);
+        this.filterPlayersByPosition(this.selectedPositions)
       }
-      this.isLoading = false;
+      this.isLoading = false
     },
     filterPlayersByPosition(positions) {
       if (positions && positions.length > 0) {
-        this.players = this.players.filter(x => positions.includes(x.position));
+        this.players = this.players.filter(x => positions.includes(x.position))
       }
     },
     like(search, haystack) {
       if (typeof search !== "string" || haystack === null) {
-        return false;
+        return false
       }
+
       // Remove special chars
       search = search.replace(
         new RegExp(
@@ -175,11 +175,13 @@ export default {
           "g"
         ),
         "\\$1"
-      );
+      )
+
       // Replace % and _ with equivalent regex
-      search = search.replace(/%/g, ".*").replace(/_/g, ".");
+      search = search.replace(/%/g, ".*").replace(/_/g, ".")
+
       // Check matches
-      return RegExp("^" + search + "$", "gi").test(haystack);
+      return RegExp("^" + search + "$", "gi").test(haystack)
     },
     showPlayerInfo(player) {
       this.dialog = true

@@ -36,7 +36,7 @@
       <PlayerCard 
         v-model="selectedPlayer"
         @dismiss="dismiss"
-        :showDismiss="myPlayers ? true : false"
+        :showDismiss="!!myPlayers"
       />
     </v-dialog>
   </v-container>
@@ -86,8 +86,8 @@ export default {
   },
   methods: {
     showPlayerInfo(player) {
-      this.selectedPlayer = player;
-      this.dialog = true;
+      this.selectedPlayer = player
+      this.dialog = true
     },
     dismiss() {      
       this.$store.commit('DISMISS_PLAYER', this.selectedPlayer)
