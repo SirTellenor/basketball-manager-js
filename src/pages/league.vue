@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import PlayerTable from "../components/PlayerTable";
+import PlayerTable from "../components/PlayerTable"
 
 export default {
   components: {

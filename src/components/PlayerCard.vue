@@ -34,7 +34,7 @@
     </v-card-text>
     <v-card-actions>
       <v-btn color="error" @click="dismiss()" block v-if="showDismiss">
-        DISMISS
+        Dismiss
       </v-btn>
       <v-btn color="primary" @click="offer()" block v-if="showOffer">
         <v-icon class="ma-1">
@@ -68,7 +68,6 @@ export default {
     }
   },
   data () {
-    console.log(this.value.club === this.$store.state.clubs[0].name)
     return {
       selectedPlayer: JSON.parse(JSON.stringify(this.value))
     }
