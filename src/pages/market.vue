@@ -52,7 +52,7 @@
         v-if="dialog"
         :value="dialog"
         @click:outside="dialog = false"
-        max-width="750px"
+        :max-width="$vuetify.breakpoint.mdAndUp ? '750px' : '100%'"
       >
         <PlayerCard 
           v-model="selectedPlayer"

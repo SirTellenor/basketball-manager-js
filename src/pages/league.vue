@@ -2,7 +2,7 @@
   <v-container>
     <v-data-table
       :headers="headers"
-      :items="$store.state.clubs"
+      :items="items"
       :single-expand="true"
       :expanded.sync="expanded"
       item-key="name"
@@ -12,7 +12,9 @@
       <template v-slot:expanded-item="{ item }">
         <td colspan="12">
           <v-container>
-            <PlayerTable :items="item.players" />
+            <PlayerTable 
+              :items="item.players" 
+            />
           </v-container>
         </td>
       </template>
@@ -37,6 +39,21 @@ export default {
         }
       ]
     };
+  },
+  computed: {
+    items() {
+      const items = []
+      this.$store.state.clubs.forEach(club => {
+        const _club = {
+          ...club
+        }
+        _club.players.forEach(player => {
+          player.club = club.name
+        });
+        items.push(_club)
+      });
+      return items
+    }
   }
 };
 </script>

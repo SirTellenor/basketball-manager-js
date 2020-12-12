@@ -33,10 +33,24 @@
       </v-row>
     </v-card-text>
     <v-card-actions>
-      <v-btn color="error" @click="dismiss()" block v-if="showDismiss">
+      <v-btn 
+        color="error" 
+        @click="dismiss()" 
+        block 
+        v-if="showDismiss"
+        outlined
+        text
+      >
         Dismiss
       </v-btn>
-      <v-btn color="primary" @click="offer()" block v-if="showOffer">
+      <v-btn 
+        color="primary" 
+        @click="offer()" 
+        block
+        v-if="showOffer"
+        text
+        outlined
+      >
         <v-icon class="ma-1">
           mdi-offer
         </v-icon>
