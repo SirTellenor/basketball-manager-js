@@ -4,7 +4,6 @@
       :headers="headers"
       :items="items"
       :items-per-page="items.length"
-      class="elevation-1"
       hide-default-footer
       no-data-text="No players found :/"
       item-key="id"
@@ -31,7 +30,7 @@
       v-if="dialog"
       :value="dialog"
       @click:outside="dialog = false"
-      max-width="750px"
+      :max-width="$vuetify.breakpoint.mdAndUp ? '750px' : '100%'"
     >
       <PlayerCard 
         v-model="selectedPlayer"

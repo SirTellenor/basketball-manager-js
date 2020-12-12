@@ -1,26 +1,72 @@
 <template>
-  <v-app>
-    <v-app-bar app color="primary" dark v-if="isInstalled">
-      <template v-for="(route, key) in $router.options.routes">
+  <v-app id="inspire">
+    <v-app-bar
+      app
+      flat
+      v-if="$vuetify.breakpoint.mdAndDown"
+    >
+      <v-container class="py-0 fill-height">
         <v-btn
-          :to="route.path"
-          :key="key"
+          v-for="link in $router.options.routes"
+          :key="link.path"
           text
-          v-if="route.name != 'Setup'"
-          depressed
+          :to="link.path" 
         >
-          {{ route.name }}
+          {{ link.name }}
         </v-btn>
-      </template>
+     </v-container>
     </v-app-bar>
 
-    <v-main>
-      <template v-if="isInstalled">
-        <router-view />
-      </template>
-      <template v-else>
-        <Setup />
-      </template>
+    <v-main class="grey lighten-3">
+      <v-container>
+        <v-row>
+          <v-col cols="12" class="text-center black--text">
+            <h1>
+             Welcome to
+              {{
+                $store.state.settings.clubname
+                ? $store.state.settings.clubname
+                : "your club"
+              }}
+            </h1>
+          </v-col>
+          <v-col cols="2" v-if="$vuetify.breakpoint.lgAndUp">
+            <v-sheet class="pa-2" rounded="lg">
+              <v-list color="transparent">
+                <v-list-item
+                  v-for="link in $router.options.routes"
+                  :key="link.path"
+                  :to="link.path"
+                  link
+                >
+                  <v-list-item-content>
+                    <v-list-item-title>
+                      {{ link.name }}
+                    </v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list>
+            </v-sheet>
+          </v-col>
+          <v-col>
+            <v-sheet
+              min-height="70vh"
+              rounded="lg"
+            >
+              <v-main
+                class="pa-0"
+              >
+                <template v-if="isInstalled">
+                  <router-view />
+                </template>
+                <template v-else>
+                  <Setup />
+                </template>
+              </v-main>
+            </v-sheet>
+          </v-col>
+        </v-row>
+      </v-container>
     </v-main>
   </v-app>
 </template>
@@ -43,5 +89,5 @@ export default {
     this.$store.dispatch("fetchMarket")
     if (this.$store.state.settings.darkMode) this.$vuetify.theme.dark = true
   }
-};
+}
 </script>

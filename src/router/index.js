@@ -13,7 +13,8 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: Index
+    component: Index,
+    icon: 'mdi-account'
   },
   {
     path: "/calendar",

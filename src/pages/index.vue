@@ -1,18 +1,5 @@
 <template>
   <v-container>
-    <v-row>
-      <v-spacer></v-spacer>
-      <h1>
-        Welcome to
-        {{
-          $store.state.settings.clubname
-            ? $store.state.settings.clubname
-            : "your club"
-        }}!
-      </h1>
-      <v-spacer></v-spacer>
-    </v-row>
-    <v-divider />
     <br />
     <br />
     <v-alert
