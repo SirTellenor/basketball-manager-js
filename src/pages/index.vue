@@ -15,38 +15,49 @@
     </v-alert>
 
     <v-row>
-      <v-col :cols="4">
-        <apexcharts 
-          type="donut" 
-          :options="chartOptions" 
-          :series="series"
-        ></apexcharts>
+      <v-col lg="4" md="12">
+        <Chart :chartData="chartData" />
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
-import VueApexCharts from 'vue-apexcharts'
+import Chart from '../components/Chart'
 
 export default {
-    components: {
-      apexcharts: VueApexCharts,
-    },
-    data: function() {
+  components: {
+    Chart
+  },
+  data: function() {
+    return {
+      alert: this.$store.state.settings.showWelcomeDialog
+    }
+  },
+  computed: {
+    chartData() {
       return {
-        series: [
-          this.$store.state.clubs[0].players.filter(x => x.position === 'PG').length, 
-          this.$store.state.clubs[0].players.filter(x => x.position === 'SG').length, 
-          this.$store.state.clubs[0].players.filter(x => x.position === 'SF').length, 
-          this.$store.state.clubs[0].players.filter(x => x.position === 'PF').length,
-          this.$store.state.clubs[0].players.filter(x => x.position === 'C').length
-        ],
-        chartOptions: {
-          labels: ['Point Guards', 'Shooting Guards', 'Small Forwards', 'Power Forwards', 'Center'],
-        },
-        alert: this.$store.state.settings.showWelcomeDialog
+        labels: ['Point Guards', 'Shooting Guards', 'Small Forwards', 'Power Forwards', 'Center'],
+        datasets: [
+          {
+            data: [
+              this.$store.state.clubs[0].players.filter(x => x.position === 'PG').length, 
+              this.$store.state.clubs[0].players.filter(x => x.position === 'SG').length, 
+              this.$store.state.clubs[0].players.filter(x => x.position === 'SF').length, 
+              this.$store.state.clubs[0].players.filter(x => x.position === 'PF').length,
+              this.$store.state.clubs[0].players.filter(x => x.position === 'C').length
+            ],
+            backgroundColor: [
+                'rgb(255, 99, 132)',
+                'rgb(54, 162, 235)',
+                'rgb(255, 206, 86)',
+                'rgb(75, 192, 192)',
+                'rgb(153, 102, 255)'
+            ]
+          }
+        ]
       }
-    },
+    }
+  }
 }
 </script>

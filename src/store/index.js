@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import calendar from "./calendar.js";
 
 Vue.use(Vuex);
 
@@ -10,6 +11,9 @@ const settingsObj = {
 }
 
 export default new Vuex.Store({
+  modules: {
+    calendar
+  },
   state: {
     clubs: [],
     settings: {
