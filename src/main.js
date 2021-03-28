@@ -6,9 +6,9 @@ import vuetify from "./plugins/vuetify";
 
 import VuetifyDialog from "vuetify-dialog";
 import "vuetify-dialog/dist/vuetify-dialog.css";
-import VueApexCharts from 'vue-apexcharts'
+import VueApexCharts from "vue-apexcharts";
 
-Vue.use(VueApexCharts)
+Vue.use(VueApexCharts);
 
 Vue.use(VuetifyDialog, {
   context: {

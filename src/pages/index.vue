@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import Chart from '../components/Chart'
+import Chart from "../components/Chart";
 
 export default {
   components: {
@@ -32,32 +32,47 @@ export default {
   data: function() {
     return {
       alert: this.$store.state.settings.showWelcomeDialog
-    }
+    };
   },
   computed: {
     chartData() {
       return {
-        labels: ['Point Guards', 'Shooting Guards', 'Small Forwards', 'Power Forwards', 'Center'],
+        labels: [
+          "Point Guards",
+          "Shooting Guards",
+          "Small Forwards",
+          "Power Forwards",
+          "Center"
+        ],
         datasets: [
           {
             data: [
-              this.$store.state.clubs[0].players.filter(x => x.position === 'PG').length, 
-              this.$store.state.clubs[0].players.filter(x => x.position === 'SG').length, 
-              this.$store.state.clubs[0].players.filter(x => x.position === 'SF').length, 
-              this.$store.state.clubs[0].players.filter(x => x.position === 'PF').length,
-              this.$store.state.clubs[0].players.filter(x => x.position === 'C').length
+              this.$store.state.clubs[0].players.filter(
+                x => x.position === "PG"
+              ).length,
+              this.$store.state.clubs[0].players.filter(
+                x => x.position === "SG"
+              ).length,
+              this.$store.state.clubs[0].players.filter(
+                x => x.position === "SF"
+              ).length,
+              this.$store.state.clubs[0].players.filter(
+                x => x.position === "PF"
+              ).length,
+              this.$store.state.clubs[0].players.filter(x => x.position === "C")
+                .length
             ],
             backgroundColor: [
-                'rgb(255, 99, 132)',
-                'rgb(54, 162, 235)',
-                'rgb(255, 206, 86)',
-                'rgb(75, 192, 192)',
-                'rgb(153, 102, 255)'
+              "rgb(255, 99, 132)",
+              "rgb(54, 162, 235)",
+              "rgb(255, 206, 86)",
+              "rgb(75, 192, 192)",
+              "rgb(153, 102, 255)"
             ]
           }
         ]
-      }
+      };
     }
   }
-}
+};
 </script>

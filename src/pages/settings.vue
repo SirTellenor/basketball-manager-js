@@ -24,8 +24,8 @@
         v-model="settings.darkMode"
         label="Darkmode"
         @change="
-          $vuetify.theme.dark = !$vuetify.theme.dark
-          updateSettings(settings)
+          $vuetify.theme.dark = !$vuetify.theme.dark;
+          updateSettings(settings);
         "
       />
       <v-spacer />
@@ -47,15 +47,15 @@ export default {
       settings: {
         ...this.$store.state.settings
       }
-    }
+    };
   },
   methods: {
     updateSettings(settings) {
-      this.$store.commit("SET_SETTINGS", settings)
+      this.$store.commit("SET_SETTINGS", settings);
     },
     reset() {
-      this.$store.commit("RESET_CLUBS")
+      this.$store.commit("RESET_CLUBS");
     }
   }
-}
+};
 </script>

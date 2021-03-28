@@ -32,7 +32,7 @@
       @click:outside="dialog = false"
       :max-width="$vuetify.breakpoint.mdAndUp ? '750px' : '100%'"
     >
-      <PlayerCard 
+      <PlayerCard
         v-model="selectedPlayer"
         @dismiss="dismiss"
         :showDismiss="!!myPlayers"
@@ -85,13 +85,13 @@ export default {
   },
   methods: {
     showPlayerInfo(player) {
-      this.selectedPlayer = player
-      this.dialog = true
+      this.selectedPlayer = player;
+      this.dialog = true;
     },
-    dismiss() {      
-      this.$store.commit('DISMISS_PLAYER', this.selectedPlayer)
-      this.dialog = false
-      this.selectedPlayer = false      
+    dismiss() {
+      this.$store.commit("DISMISS_PLAYER", this.selectedPlayer);
+      this.dialog = false;
+      this.selectedPlayer = false;
     }
   }
 };

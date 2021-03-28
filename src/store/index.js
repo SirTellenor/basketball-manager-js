@@ -8,7 +8,7 @@ const settingsObj = {
   showWelcomeDialog: true,
   clubname: "",
   isInstalled: false
-}
+};
 
 export default new Vuex.Store({
   modules: {
@@ -18,7 +18,7 @@ export default new Vuex.Store({
     clubs: [],
     settings: {
       showWelcomeDialog: false,
-      darkMode: false
+      darkMode: true
     },
     market: {
       contractlessPlayers: []
@@ -39,7 +39,7 @@ export default new Vuex.Store({
       state.clubs = clubs;
     },
     INIT_MARKET(state, market) {
-      state.market = market
+      state.market = market;
     },
     RESET_CLUBS(state) {
       state.clubs = [];
@@ -47,18 +47,20 @@ export default new Vuex.Store({
       localStorage.setItem("bmjs_settings", JSON.stringify(settingsObj));
     },
     DISMISS_PLAYER(state, player) {
-      state.market.contractlessPlayers.push(player)
-      state.clubs[0].players = state.clubs[0].players.filter(x => x != player)
-      localStorage.setItem("bmjs_clubs", JSON.stringify(state.clubs))
-      localStorage.setItem("bmjs_market", JSON.stringify(state.market))
+      state.market.contractlessPlayers.push(player);
+      state.clubs[0].players = state.clubs[0].players.filter(x => x != player);
+      localStorage.setItem("bmjs_clubs", JSON.stringify(state.clubs));
+      localStorage.setItem("bmjs_market", JSON.stringify(state.market));
     },
     ADD_PLAYER(state, player) {
-      state.clubs[0].players.push(player)
-      localStorage.setItem("bmjs_clubs", JSON.stringify(state.clubs))
+      state.clubs[0].players.push(player);
+      localStorage.setItem("bmjs_clubs", JSON.stringify(state.clubs));
     },
     REMOVE_PLAYER_CONTRACTLESS(state, player) {
-      state.market.contractlessPlayers = state.market.contractlessPlayers.filter(x => x.id != player.id)
-      localStorage.setItem("bmjs_market", JSON.stringify(state.market))
+      state.market.contractlessPlayers = state.market.contractlessPlayers.filter(
+        x => x.id != player.id
+      );
+      localStorage.setItem("bmjs_market", JSON.stringify(state.market));
     }
   },
   actions: {
@@ -92,14 +94,14 @@ export default new Vuex.Store({
       return state.clubs[0].players;
     },
     getShirtNr: state => currenShirtNr => {
-      const nrs = state.clubs[0].players.map(player => player.nr)
+      const nrs = state.clubs[0].players.map(player => player.nr);
 
-      let _currentShirtNr = currenShirtNr
+      let _currentShirtNr = currenShirtNr;
       while (nrs.includes(_currentShirtNr)) {
-        _currentShirtNr++
+        _currentShirtNr++;
       }
 
-      return _currentShirtNr
+      return _currentShirtNr;
     }
   }
-})
+});
