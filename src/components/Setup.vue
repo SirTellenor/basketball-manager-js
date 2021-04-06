@@ -170,14 +170,14 @@ export default {
         let resCnt = 0;
         const stamina = 5;
         for (let i = 0; i < clubs.length; i++) {
+          let playerNumbers = [...numbers];
+          playerNumbers = shuffle(playerNumbers);
           clubs[i].players = [];
           for (let j = 0; j < 13; j++) {
-            let playerNumbers = [...numbers];
-            playerNumbers = shuffle(playerNumbers);
 
             const player = res[resCnt];
 
-            const _player = this.formatPlayer(player, playerNumbers[i], positions[j], stamina)
+            const _player = this.formatPlayer(player, playerNumbers[j], positions[j], stamina)
 
             clubs[i].players.push(_player);
             resCnt++;
@@ -214,9 +214,10 @@ export default {
         position: position,
         id: player.login.uuid,
         nationality: player.location.country,
+        age: Math.floor(Math.random() * (34 - 17 + 1) + 17),
         stamina,
-        offence: Math.floor(Math.random() * (8 - 1)) + 1,
-        defence: Math.floor(Math.random() * (8 - 1)) + 1
+        offence: Math.floor(Math.random() * (8 - 1 + 1) + 1),
+        defence: Math.floor(Math.random() * (8 - 1 + 1) + 1)
       };
     }
   }

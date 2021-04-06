@@ -7,7 +7,7 @@
         selectedPlayer.position
     }}</v-card-title>
     <v-card-text>
-      <p>{{ selectedPlayer.nationality }}</p>
+      <p>{{ selectedPlayer.nationality }} <br/> {{ "Age: " + selectedPlayer.age }}</p>
       <v-row>
         <v-col cols="4">
           <PlayerData

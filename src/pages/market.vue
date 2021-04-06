@@ -41,21 +41,8 @@
         no-data-text="No players found :/"
         item-key="id"
         group-by="club"
-      >
-        <template v-slot:item="{ item }">
-          <tr @click="showPlayerInfo(item)" style="cursor:pointer">
-            <td>
-              {{ item.position }}
-            </td>
-            <td>
-              {{ item.name }}
-            </td>
-            <td>
-              {{ item.nationality }}
-            </td>
-          </tr>
-        </template>
-      </v-data-table>
+        @click:row="showPlayerInfo"
+      />
 
       <v-dialog
         v-if="dialog"
@@ -72,6 +59,12 @@
     </v-container>
   </v-container>
 </template>
+
+<style>
+tr {
+  cursor: pointer;
+}
+</style>
 
 <script>
 import PlayerCard from "../components/PlayerCard.vue";
@@ -190,9 +183,9 @@ export default {
       // Check matches
       return RegExp("^" + search + "$", "gi").test(haystack);
     },
-    showPlayerInfo(player) {
+    showPlayerInfo(item) {
       this.dialog = true;
-      this.selectedPlayer = player;
+      this.selectedPlayer = item;
     },
     offer() {
       const newPlayer = JSON.parse(JSON.stringify(this.selectedPlayer));
